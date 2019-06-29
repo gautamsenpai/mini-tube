@@ -8,7 +8,7 @@ class App extends React.Component {
     state = { videos: [] };
 
     onTermSubmit = async (term) => {
-        const reponsse = await youtube.get("/search", {
+        const reponse = await youtube.get("/search", {
             params: { 
                 q: term,
                 part: "snippet",
@@ -17,7 +17,7 @@ class App extends React.Component {
             }
         });
 
-        this.setState({videos: reponsse.data.items});
+        this.setState({videos: reponse.data.items});
         console.log(this.state.videos);
     }
 
