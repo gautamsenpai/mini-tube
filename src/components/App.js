@@ -5,7 +5,7 @@ import youtube from '../apis/youtube';
 
 class App extends React.Component {
 
-    state = { videos: [] };
+    state = { videos: [], selectedVideo: null };
 
     onTermSubmit = async (term) => {
         const response = await youtube.get("/search", {
@@ -21,11 +21,15 @@ class App extends React.Component {
         console.log(this.state.videos);
     }
 
+    onVideoSelect = (video) => {
+        console.log("Selected video:", video.snippet.title);
+    }
+
     render(){
         return (
         <div className="ui container">
             <SearchBar callBackToApp={this.onTermSubmit}/>
-            <VideoList videos={this.state.videos}/>
+            <VideoList videos={this.state.videos} onVideoSelect={this.onVideoSelect}/>
         </div>
         );
     }
