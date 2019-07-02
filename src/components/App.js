@@ -8,7 +8,7 @@ class App extends React.Component {
     state = { videos: [] };
 
     onTermSubmit = async (term) => {
-        const reponse = await youtube.get("/search", {
+        const response = await youtube.get("/search", {
             params: { 
                 q: term,
                 part: "snippet",
@@ -17,14 +17,14 @@ class App extends React.Component {
             }
         });
 
-        this.setState({videos: reponse.data.items});
+        this.setState({videos: response.data.items});
         console.log(this.state.videos);
     }
 
     render(){
         return (
         <div className="ui container">
-            <SearchBar sendToApp={this.onTermSubmit}/>
+            <SearchBar callBackToApp={this.onTermSubmit}/>
             <VideoList videos={this.state.videos}/>
         </div>
         );
